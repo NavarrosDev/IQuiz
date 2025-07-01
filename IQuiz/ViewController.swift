@@ -9,11 +9,19 @@ import UIKit
 
 class ViewController: UIViewController {
 
+    @IBOutlet weak var botaoIniciar: UIButton!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        configureLayout()
     }
-
-
+    
+    @IBAction func clicaBotaoIniciar(_ sender: Any) {
+        print("Clicou no botao")
+    }
+    
+    func configureLayout() {
+        botaoIniciar.layer.cornerRadius = 12.0
+    }
 }
 
