@@ -19,9 +19,9 @@ class QuestaoViewController: UIViewController {
         let usuarioAcertou = questoes[numeroQuestao].questaoCorreta == sender.tag
         if usuarioAcertou {
             pontuacao += 1
-            sender.backgroundColor = UIColor(red: 11/255, green: 161/255, blue: 53/255, alpha: 1.0)
-        } else  {
-            sender.backgroundColor = UIColor(red: 211/255, green: 17/255, blue: 17/255, alpha: 1.0)
+            sender.backgroundColor = UIColor.corDeFundoVerde
+        } else {
+            sender.backgroundColor = UIColor.corDeFundoVermelho
         }
         
         if numeroQuestao < questoes.count - 1 {
@@ -33,13 +33,14 @@ class QuestaoViewController: UIViewController {
                 userInfo: nil,
                 repeats: false
             )
+        } else {
+            navegeParaTelaDesempenho()
         }
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
         configureLayout()
         configureQuestoes()
     }
@@ -55,19 +56,19 @@ class QuestaoViewController: UIViewController {
         tituloQuestaoLabel.text = questoes[numeroQuestao].titulo
         botoesRespostas.forEach { botao in
             botao.setTitle(questoes[numeroQuestao].questoes[botao.tag], for: .normal)
-            botao.backgroundColor = UIColor(red: 116/255, green: 50/255, blue: 255/255, alpha: 1.0)
+            botao.backgroundColor = UIColor.corDeFundoPadrao
         }
     }
-
     
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    func navegeParaTelaDesempenho() {
+        performSegue(
+            withIdentifier: "irParaTelaDesempenho",
+            sender: nil
+        )
     }
-    */
 
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard let desempenhoVC = segue.destination as? DesempenhoViewController else { return }
+        desempenhoVC.pontuacao = pontuacao
+    }
 }

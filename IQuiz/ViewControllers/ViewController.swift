@@ -16,12 +16,9 @@ class ViewController: UIViewController {
         configureLayout()
     }
     
-    @IBAction func clicaBotaoIniciar(_ sender: Any) {
-        print("Clicou no botao")
-    }
-    
     func configureLayout() {
         botaoIniciar.layer.cornerRadius = 12.0
+        navigationItem.hidesBackButton = true
     }
 }
 
